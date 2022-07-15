@@ -62,3 +62,53 @@ ALTER TABLE animals
 ADD CONSTRAINT owners_fkey
 FOREIGN KEY (owner_id)
 REFERENCES owners(id);
+
+/*
+Create a table named vets with the following columns:
+id: integer (set it as autoincremented PRIMARY KEY)
+name: string
+age: integer
+date_of_graduation: date 
+*/
+CREATE TABLE vets(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    age INT,
+    date_of_graduation DATE,
+    PRIMARY KEY(id)
+);
+
+/*
+There is a many-to-many relationship between the tables species and vets: 
+a vet can specialize in multiple species, and a species can have multiple vets specialized in it.
+ Create a "join table" called specializations to handle this relationship.
+*/
+CREATE TABLE specializations(
+    species_id INT,
+    vets_id INT,
+    CONSTRAINT species_sp_key
+    FOREIGN KEY(species_id)
+    REFERENCES species(id),
+    CONSTRAINT vets_sp_key
+    FOREIGN KEY(vets_id)
+    REFERENCES vets(id)
+);
+
+/*
+There is a many-to-many relationship between the tables animals and vets: 
+an animal can visit multiple vets and one vet can be visited by multiple animals. Create a "join table" called visits to handle this relationship,
+ it should also keep track of the date of the visit.
+*/
+
+CREATE TABLE visits(
+    animal_id INT,
+    vets_id INT,
+    date_of_visit DATE,
+    CONSTRAINT animal_vkey
+    FOREIGN KEY(animal_id)
+    REFERENCES animals(id),
+    CONSTRAINT vets_vkey
+    FOREIGN KEY(vets_id)
+    REFERENCES vets(id)
+);
+
