@@ -1,6 +1,7 @@
 # vet-clinic-database
 
 > A relational database to create the data structure for a vet clinic.
+> [databaseschema_diagram](./databaseschema.png)
 
 ## Getting Started
 
